@@ -99,6 +99,7 @@ class _SearchServicesState extends State<SearchServices> {
           ),
           Expanded(
             child: ListView.builder(
+              padding: EdgeInsets.zero,
               itemCount: services.length,
               itemBuilder: (BuildContext context, int index) {
                 if (services[index]
@@ -113,10 +114,11 @@ class _SearchServicesState extends State<SearchServices> {
                       height: 55,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          const SizedBox(),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                             child: Text(
                               services[index],
                               style: const TextStyle(
@@ -125,7 +127,9 @@ class _SearchServicesState extends State<SearchServices> {
                                   fontWeight: FontWeight.w400),
                             ),
                           ),
-                          const Divider()
+                          const Divider(
+                            height: 0,
+                          )
                         ],
                       ),
                     ),

@@ -179,6 +179,7 @@ class _SearchLocationState extends State<SearchLocation> {
           ),
           Expanded(
             child: ListView.builder(
+              padding: EdgeInsets.zero,
               itemCount: locationlist.length,
               itemBuilder: (BuildContext context, int index) {
                 if (locationlist[index]
@@ -193,10 +194,11 @@ class _SearchLocationState extends State<SearchLocation> {
                       height: 55,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          const SizedBox(),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                             child: Row(
                               children: [
                                 Icon(
@@ -216,7 +218,9 @@ class _SearchLocationState extends State<SearchLocation> {
                               ],
                             ),
                           ),
-                          const Divider()
+                          const Divider(
+                            height: 0,
+                          )
                         ],
                       ),
                     ),
