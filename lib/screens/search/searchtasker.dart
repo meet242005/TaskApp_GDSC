@@ -28,7 +28,9 @@ class _SearchtaskerState extends State<SearchTasker> {
         chip1text = sharedPreferences.getString("userLocation")!;
       });
     } else {
-      chip1visible = false;
+      setState(() {
+        chip1visible = false;
+      });
     }
   }
 
