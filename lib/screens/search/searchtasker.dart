@@ -11,6 +11,9 @@ class SearchTasker extends StatefulWidget {
 }
 
 class _SearchtaskerState extends State<SearchTasker> {
+  bool chip1visible = true;
+  bool chip2visible = true;
+  bool chip3visible = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,9 +21,9 @@ class _SearchtaskerState extends State<SearchTasker> {
       body: Column(
         children: [
           Container(
-            height: 270,
+            height: chip1visible || chip2visible || chip3visible ? 255 : 220,
             width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
+            padding: const EdgeInsets.fromLTRB(16, 50, 16, 16),
             decoration: BoxDecoration(color: AppColors.accentColor),
             child: Column(
               children: [
@@ -40,11 +43,186 @@ class _SearchtaskerState extends State<SearchTasker> {
                     ),
                     const Text(
                       "Search Tasker",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 18,
+                          letterSpacing: 0.5,
+                          fontWeight: FontWeight.w600),
                     )
                   ],
-                )
+                ),
+                Container(
+                  height: 55,
+                  width: double.infinity,
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 16),
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        widget.taskertype,
+                        style: const TextStyle(
+                            fontSize: 16,
+                            letterSpacing: 0.5,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(Icons.filter_list),
+                      )
+                    ],
+                  ),
+                ),
+                chip1visible || chip2visible || chip3visible
+                    ? SizedBox(
+                        height: 36,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            chip1visible
+                                ? Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                                    child: Chip(
+                                      side: BorderSide(
+                                          color: AppColors.primaryColor),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      backgroundColor: AppColors.primaryColor,
+                                      deleteIconColor: Colors.white,
+                                      deleteIcon: const Icon(
+                                        Icons.close,
+                                        size: 18,
+                                      ),
+                                      labelStyle:
+                                          const TextStyle(color: Colors.white),
+                                      label: Text("New York"),
+                                      onDeleted: () {
+                                        setState(() {
+                                          chip1visible = !chip1visible;
+                                        });
+                                      },
+                                    ),
+                                  )
+                                : const SizedBox(),
+                            chip2visible
+                                ? Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                                    child: Chip(
+                                      side: BorderSide(
+                                          color: AppColors.primaryColor),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      backgroundColor: AppColors.primaryColor,
+                                      deleteIconColor: Colors.white,
+                                      deleteIcon: const Icon(
+                                        Icons.close,
+                                        size: 18,
+                                      ),
+                                      labelStyle:
+                                          const TextStyle(color: Colors.white),
+                                      label: Text("500Rs - 1000Rs"),
+                                      onDeleted: () {
+                                        setState(() {
+                                          chip2visible = !chip2visible;
+                                        });
+                                      },
+                                    ),
+                                  )
+                                : const SizedBox(),
+                            chip3visible
+                                ? Chip(
+                                    side: BorderSide(
+                                        color: AppColors.primaryColor),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    backgroundColor: AppColors.primaryColor,
+                                    deleteIconColor: Colors.white,
+                                    deleteIcon: const Icon(
+                                      Icons.close,
+                                      size: 18,
+                                    ),
+                                    labelStyle:
+                                        const TextStyle(color: Colors.white),
+                                    label: Text("Within a Week"),
+                                    onDeleted: () {
+                                      setState(() {
+                                        chip3visible = !chip3visible;
+                                      });
+                                    },
+                                  )
+                                : const SizedBox(),
+                          ],
+                        ),
+                      )
+                    : const SizedBox(),
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '4 results for "${widget.taskertype}"',
+                      style: const TextStyle(
+                          fontSize: 16,
+                          letterSpacing: 0.5,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                TaskerCard(
+                    name: "Dianne Rusell",
+                    charges: "500",
+                    rating: "4.5",
+                    reviewcount: "4",
+                    waitingcount: "5",
+                    description:
+                        "Who specializes in installing and maintaining systems used for potable (drinking) water, sewage and drainage in plumbing systems.",
+                    photourl:
+                        "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg"),
+                TaskerCard(
+                    name: "Meet Chavan",
+                    charges: "900",
+                    rating: "5.0",
+                    reviewcount: "90",
+                    waitingcount: "2",
+                    description:
+                        "Trained in all aspects of plumbing, including potable water, sewage, and drainage systems installation and maintenance.",
+                    photourl:
+                        "https://img.freepik.com/free-photo/bearded-young-man-wearing-shirt_273609-5938.jpg"),
+                TaskerCard(
+                    name: "Brooklyn Simmons",
+                    charges: "600",
+                    rating: "4.3",
+                    reviewcount: "6",
+                    waitingcount: "3",
+                    description:
+                        "Skilled professional in the installation and upkeep of plumbing systems for drinking water, waste management, and drainage.",
+                    photourl:
+                        "https://img.freepik.com/free-photo/emotions-people-concept-headshot-serious-looking-handsome-man-with-beard-looking-confident-determined_1258-26730.jpg"),
+                TaskerCard(
+                    name: "Devon Lane",
+                    charges: "900",
+                    rating: "5.0",
+                    reviewcount: "90",
+                    waitingcount: "2",
+                    description:
+                        "Trained in all aspects of plumbing, including potable water, sewage, and drainage systems installation and maintenance.",
+                    photourl:
+                        "https://img.freepik.com/free-photo/beautiful-male-half-length-portrait-isolated-white-studio-background-young-emotional-hindu-man-blue-shirt-facial-expression-human-emotions-advertising-concept-standing-smiling_155003-25250.jpg"),
               ],
             ),
           )
@@ -52,4 +230,129 @@ class _SearchtaskerState extends State<SearchTasker> {
       ),
     );
   }
+}
+
+Widget TaskerCard(
+    {name = "",
+    charges = "",
+    rating = "",
+    reviewcount = "",
+    waitingcount = "",
+    description = "",
+    required photourl}) {
+  return Container(
+    height: 205,
+    color: Colors.white,
+    child: Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: 80,
+                        width: 100,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(photourl ?? ""),
+                                fit: BoxFit.cover),
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              name,
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  letterSpacing: 0.5,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                  size: 20,
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  '$rating ($reviewcount Reviews)',
+                                  style: const TextStyle(
+                                      fontSize: 14,
+                                      letterSpacing: 0.5,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.check_circle_outline,
+                                  color: AppColors.primaryColor,
+                                  size: 20,
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  '$waitingcount waiting in line jobs',
+                                  style: const TextStyle(
+                                      fontSize: 14,
+                                      letterSpacing: 0.5,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    '₹$charges/hr',
+                    style: const TextStyle(
+                        fontSize: 16,
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Text(
+                '''$description''',
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                    fontSize: 14,
+                    letterSpacing: 0.5,
+                    fontWeight: FontWeight.w400),
+              ),
+            ],
+          ),
+        ),
+        const Divider()
+      ],
+    ),
+  );
 }
