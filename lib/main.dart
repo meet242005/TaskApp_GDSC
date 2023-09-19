@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gdsc_task/screens/search/searchlocation.dart';
 import 'package:gdsc_task/screens/search/searchservices.dart';
 import 'package:gdsc_task/screens/search/searchtasker.dart';
 import 'package:get/get.dart';
@@ -36,13 +37,15 @@ class TempScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text("Temporary Navigation"),
-            const ElevatedButton(
-              onPressed: null,
-              style: ButtonStyle(
+            ElevatedButton(
+              onPressed: () {
+                Get.to(() => const SearchLocation());
+              },
+              style: const ButtonStyle(
                 foregroundColor: MaterialStatePropertyAll(Colors.white),
                 backgroundColor: MaterialStatePropertyAll(Colors.deepPurple),
               ),
-              child: Text("Location Select Page"),
+              child: const Text("Location Select Page"),
             ),
             ElevatedButton(
               onPressed: () {
@@ -52,7 +55,7 @@ class TempScreen extends StatelessWidget {
                 foregroundColor: MaterialStatePropertyAll(Colors.white),
                 backgroundColor: MaterialStatePropertyAll(Colors.deepPurple),
               ),
-              child: Text("Services Search Page"),
+              child: const Text("Services Search Page"),
             ),
             ElevatedButton(
               onPressed: () {

@@ -1,6 +1,9 @@
+//Created By Meet Chavan
+
 import 'package:flutter/material.dart';
 import 'package:gdsc_task/constants/colors.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchTasker extends StatefulWidget {
   final String taskertype;
@@ -11,9 +14,30 @@ class SearchTasker extends StatefulWidget {
 }
 
 class _SearchtaskerState extends State<SearchTasker> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getChipData();
+  }
+
+  Future getChipData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.containsKey("userLocation")) {
+      setState(() {
+        chip1text = sharedPreferences.getString("userLocation")!;
+      });
+    } else {
+      chip1visible = false;
+    }
+  }
+
   bool chip1visible = true;
   bool chip2visible = true;
   bool chip3visible = true;
+  var chip1text = "";
+  var chip2text = "₹500 - ₹1K";
+  var chip3text = "Within a week";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,7 +123,7 @@ class _SearchtaskerState extends State<SearchTasker> {
                                       ),
                                       labelStyle:
                                           const TextStyle(color: Colors.white),
-                                      label: Text("New York"),
+                                      label: Text(chip1text),
                                       onDeleted: () {
                                         setState(() {
                                           chip1visible = !chip1visible;
@@ -126,7 +150,7 @@ class _SearchtaskerState extends State<SearchTasker> {
                                       ),
                                       labelStyle:
                                           const TextStyle(color: Colors.white),
-                                      label: Text("500Rs - 1000Rs"),
+                                      label: Text(chip2text),
                                       onDeleted: () {
                                         setState(() {
                                           chip2visible = !chip2visible;
@@ -150,7 +174,7 @@ class _SearchtaskerState extends State<SearchTasker> {
                                     ),
                                     labelStyle:
                                         const TextStyle(color: Colors.white),
-                                    label: Text("Within a Week"),
+                                    label: Text(chip3text),
                                     onDeleted: () {
                                       setState(() {
                                         chip3visible = !chip3visible;
